@@ -3,36 +3,34 @@
 	import { quintOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
+	import store from './Store.js';
+	import User from './User.svelte';
+	import Users from './Users.svelte';
 	
-	let initialOrder = [
-		{ id: 1, name: 'Corey' },
-		{ id: 2, name: 'Jessica' },
-		{ id: 3, name: 'Bob' },
-		{ id: 4, name: 'Carin' },
-		{ id: 5, name: 'Tony' },
-		{ id: 6, name: 'BJ' },
-		{ id: 7, name: 'Brandon' },
-		{ id: 8, name: 'Sierra' },
-		{ id: 9, name: 'Trin' },
-		{ id: 10, name: 'Brian' },
-		{ id: 11, name: 'Katie' },
-		{ id: 12, name: 'Hannah' },
-	];
+	let users = [];
+	let name;
+	
+	// Get articles
+	store.subscribe(data => {
+		users = data;
+	})
+	
+	let initialOrder = users;
 	
 	$: partners = [];
-	$: listHeight = initialOrder.length * 52;
+	$: listHeight = (users.length * 25) + 150;
 	$: bgHeight = listHeight + 50;
-	$: console.log(listHeight)
+	$: console.log(users)
 
 	//handle all of the app logic in the click function, like the animal I am
 	const handleClick = function(){
 		//order will be empty the first time or match previous shuffle
-		partners = initialOrder;
+		partners = users;
 		
 		//to make things dramatic, we want to redo the shuffle until no elements match their original position rather than optimizing the algorithm
 		do {
 			partners = shuffle(partners)
-		} while (hasOriginalPosition(initialOrder, partners));
+		} while (hasOriginalPosition(users, partners));
 	}
 	
 	//arrays must match in length to be valid
@@ -47,34 +45,53 @@
 		return false;
 	}
 
-// return new randomly sorted array from shuffle function
-function shuffle(array) {
-  return [...array].sort(() => 0.5 - Math.random());
-}
+	// return new randomly sorted array from shuffle function
+	function shuffle(array) {
+	return [...array].sort(() => 0.5 - Math.random());
+	}
 
-//ooooh, pretty animations
-const [send, receive] = crossfade({
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
+	// Remove User
+	function removeUser(event) {
+		const userToRemove = event.detail;
+		let filteredList = users.filter(item => item.id !== userToRemove.id)
+		store.set(filteredList);
+	}
 
-			return {
-				duration: 500,
-				easing: quintOut,
-				css: t => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
+	// Add article
+	function addUser() {
+		const newUser = {
+			id: Date.now(),
+			name
+		};
+		store.update(data => {
+			return [...data, newUser];
+		})
+	}
+
+	//ooooh, pretty animations
+	const [send, receive] = crossfade({
+			fallback(node, params) {
+				const style = getComputedStyle(node);
+				const transform = style.transform === 'none' ? '' : style.transform;
+
+				return {
+					duration: 500,
+					easing: quintOut,
+					css: t => `
+						transform: ${transform} scale(${t});
+						opacity: ${t}
+					`
+				};
+			}
+		});
 </script>
 
 <div class="background" style="height:{bgHeight}">
 	<div class="board">
 		<div class="button-container">
 			<div class="button-wrapper">
-				<button class="repeating-linear" on:click={handleClick}>Shuffle</button>
+				<Users />
+				<button class="repeating-linear main-btn" on:click={handleClick}>Shuffle</button>
 				<span class="subtext">
 					Click button to assign new secret santas
 				</span>
@@ -85,10 +102,11 @@ const [send, receive] = crossfade({
 			<h2>
 				Participant
 			</h2>
-			{#each initialOrder as person}
-				<p>
-				{person.name}
-				</p>
+			{#each users as person}
+			<div class="user">
+				<p>{person.name}</p>
+				<button class="remove" on:click={removeUser}> X </button>
+			</div>
 			{/each}
 		</div>
 		<div class="right" style="height:{listHeight}px">
@@ -97,7 +115,7 @@ const [send, receive] = crossfade({
 			</h2>
 			<span class="placeholder">
 			{#each partners as person (person.id)}
-				<p 
+				<p class="user"
 				in:receive="{{key: person.id}}"
 				out:send="{{key: person.id}}" 
 				animate:flip >
@@ -136,6 +154,7 @@ const [send, receive] = crossfade({
 		float: left;
 		min-width: 100px;
 		max-width: 300px;
+		min-height: 200px;
 		width: 50%;
 		height: 70vh;
 		background-color: white;
@@ -143,6 +162,17 @@ const [send, receive] = crossfade({
 	
 	.left h2, .right h2{
 		height: 80px;
+	}
+
+	.left .user, .right .user{
+		width: 100%;
+		display: inline-flex;
+		align-items: baseline;
+		justify-content: center;
+	}
+
+	.user p{
+		padding-right: 0.5rem;
 	}
 	
 	.button-container{
@@ -156,10 +186,12 @@ const [send, receive] = crossfade({
 		padding: 1rem;
 		padding-bottom: 0;
 	}
-	button {
+	.main-btn{
 		margin: auto;
 		width: 200px;
 		height: 80px;
+	}
+	button {
 		border: 3px solid #235E6F;
 		font-weight: bold;
 		text-transform: uppercase;
@@ -174,6 +206,18 @@ const [send, receive] = crossfade({
 		background-color: #235E6F;
 	}
 	
+	.remove {
+		position: inline;
+		font-size: 1.1rem;
+		background-color: unset;
+		border: none;
+		color: red;
+	}
+	.remove:hover{
+		background-color:red;
+		color: white;
+	}
+
 	h2 {
 		font-size: 2em;
 		font-weight: 200;
