@@ -18,9 +18,8 @@
 	let initialOrder = users;
 	
 	$: partners = [];
-	$: listHeight = (users.length * 25) + 150;
+	$: listHeight = (users.length * 52) + 150;
 	$: bgHeight = listHeight + 50;
-	$: console.log(users)
 
 	//handle all of the app logic in the click function, like the animal I am
 	const handleClick = function(){
@@ -86,7 +85,8 @@
 		});
 </script>
 
-<div class="background" style="height:{bgHeight}">
+<svelte:window bind:innerHeight={bgHeight}/>
+<div class="background" style="height:{bgHeight};">
 	<div class="board">
 		<div class="button-container">
 			<div class="button-wrapper">
@@ -139,7 +139,6 @@
 		#E74C3C 10px,
 		#C0392B 10px,
 		#C0392B 20px);
-
 	}
 	
 	.board {
@@ -161,7 +160,7 @@
 	}
 	
 	.left h2, .right h2{
-		height: 80px;
+		height: 40px;
 	}
 
 	.left .user, .right .user{

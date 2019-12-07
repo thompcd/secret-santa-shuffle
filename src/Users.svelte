@@ -30,7 +30,7 @@
 </script>
 
 
-<h3>Add new User</h3>
+<h3>Add new participant</h3>
 <form on:submit|preventDefault={addUser}>
 	<input type="text" name="name" id="name" placeholder="Name" bind:value={name} />
 	<br />

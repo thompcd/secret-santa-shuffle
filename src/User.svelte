@@ -15,13 +15,6 @@
 		padding: 0;
 		margin: 0 0 10px 0;
 	}
-	article {
-		padding: 10px;
-		margin-bottom: 20px;
-		border: solid 1px orange;
-		width: 50%;
-		position: relative;
-	}
 	button {
 		position: inline;
 		font-size: 12px;
