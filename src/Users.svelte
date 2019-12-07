@@ -29,10 +29,40 @@
 	}
 </script>
 
+<div class="align">
+	<h3>New participant</h3>
+	<form on:submit|preventDefault={addUser}>
+		<input type="text" name="name" id="name" placeholder="Name" bind:value={name} />
+		<button type="submit">Add</button>
+	</form>
+</div>
 
-<h3>Add new participant</h3>
-<form on:submit|preventDefault={addUser}>
-	<input type="text" name="name" id="name" placeholder="Name" bind:value={name} />
-	<br />
-	<button type="submit">Add</button>
-</form>
+
+<style>
+
+form{
+	padding: 0;
+	padding-bottom: 1rem;
+}
+
+.align{
+	display: inline-flex;
+	justify-content: center;
+	align-items: baseline;
+	background-color: white;
+	width: 100%;
+}
+
+.align h3{
+	color: #0F8A5F;
+	font-weight: 400;
+	padding: 0 0.5rem;
+	margin: 0;
+}
+
+button{
+	background-color: #235E6F;
+	color: white;
+	border: none;
+}
+</style>

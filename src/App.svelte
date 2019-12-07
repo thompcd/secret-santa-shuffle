@@ -20,6 +20,7 @@
 	$: partners = [];
 	$: listHeight = (users.length * 52) + 150;
 	$: bgHeight = listHeight + 50;
+	$: console.log(users)
 
 	//handle all of the app logic in the click function, like the animal I am
 	const handleClick = function(){
@@ -86,11 +87,10 @@
 </script>
 
 <svelte:window bind:innerHeight={bgHeight}/>
-<div class="background" style="height:{bgHeight};">
+<div class="background" style="height:100%;">
 	<div class="board">
 		<div class="button-container">
 			<div class="button-wrapper">
-				<Users />
 				<button class="repeating-linear main-btn" on:click={handleClick}>Shuffle</button>
 				<span class="subtext">
 					Click button to assign new secret santas
@@ -122,13 +122,15 @@
 				{person.name}
 				</p>
 			{/each}
-				</span>
+			</span>
 		</div>
+			<Users />
 	</div>
 </div>
 
 
 <style>
+
 	.background{
 		display: flex;
 		flex-align: center;
