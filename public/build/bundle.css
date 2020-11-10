@@ -1,0 +1,10 @@
+.background.svelte-gr63kp{display:flex;flex-align:center;background:#C0392B;background:repeating-linear-gradient(
+		45deg,
+		#E74C3C,
+		#E74C3C 10px,
+		#C0392B 10px,
+		#C0392B 20px)}.board.svelte-gr63kp{max-width:36em;width:100%;height:100%;margin:auto auto;padding:2rem}.left.svelte-gr63kp,.right.svelte-gr63kp{float:left;min-width:100px;max-width:300px;min-height:200px;width:50%;height:70vh;background-color:white}.left.svelte-gr63kp h2.svelte-gr63kp,.right.svelte-gr63kp h2.svelte-gr63kp{height:40px}.left.svelte-gr63kp .user.svelte-gr63kp,.right.svelte-gr63kp .user.svelte-gr63kp{width:100%;display:inline-flex;align-items:baseline;justify-content:center}.user.svelte-gr63kp p.svelte-gr63kp{padding-right:0.5rem}.button-container.svelte-gr63kp{padding-top:2rem;width:100%;background-color:white}.button-wrapper.svelte-gr63kp{display:flex;flex-direction:column;padding:1rem;padding-bottom:0}.main-btn.svelte-gr63kp{margin:auto;width:200px;height:80px}button.svelte-gr63kp{border:3px solid #235E6F;font-weight:bold;text-transform:uppercase;font-size:1.3rem;background-color:#34A65F;color:white}button.svelte-gr63kp:hover{background-color:#F5624D}button.svelte-gr63kp:active{background-color:#235E6F}.remove.svelte-gr63kp{position:inline;font-size:1.1rem;background-color:unset;border:none;color:red}.remove.svelte-gr63kp:hover{background-color:red;color:white}h2.svelte-gr63kp{font-size:2em;font-weight:200;user-select:none;color:#0F8A5F;text-align:center}p.svelte-gr63kp{text-align:center;font-size:1.1em}.subtext.svelte-gr63kp{padding-top:1rem;text-align:center;font-weight:300}
+form.svelte-qk1ssy{padding:0;padding-bottom:1rem}.align.svelte-qk1ssy{display:inline-flex;justify-content:center;align-items:baseline;background-color:white;width:100%}.align.svelte-qk1ssy h3.svelte-qk1ssy{color:#0F8A5F;font-weight:400;padding:0 0.5rem;margin:0}button.svelte-qk1ssy{background-color:#235E6F;color:white;border:none}
+h2.svelte-olm94k{padding:0;margin:0 0 10px 0}button.svelte-olm94k{position:inline;font-size:12px;background-color:unset;border:none;color:red}button.svelte-olm94k:hover{background-color:red;color:white}
+
+/*# sourceMappingURL=bundle.css.map */
