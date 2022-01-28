@@ -1,5 +1,5 @@
 # It's Christmas Time!
-##Quick, dig up that link to assign the secret santas while you're still thinking about it!
+## Quick, dig up that link to assign the secret santas while you're still thinking about it!
 
 ![Secret Santa Screen Shot](santashufflescreenshot.png)
 
